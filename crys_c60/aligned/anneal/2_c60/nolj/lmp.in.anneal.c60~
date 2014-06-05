@@ -1,0 +1,50 @@
+###########################################################################
+#x0
+###########################################################################
+units 			metal
+atom_style		full
+read_data		fort.26.nonbonded
+group         		C type = 1
+###########################################################################
+#OLPS
+###########################################################################
+
+################################################################################
+#### Pair potentials
+################################################################################
+#pair_style hybrid/overlay tersoff lj/cut 12.0
+#pair_coeff * * tersoff C.tersoff *
+#pair_coeff 1 2 lj/cut 0.0700000000 3.5500000000
+#special_bonds lj 0.0 0.0 0.0 coul 0.0 0.0 0.0
+
+pair_style tersoff 
+pair_coeff * * C.tersoff 1 2
+
+#pair_style lj/cut 12.0
+#pair_coeff 1 1 0.0700000000 3.5500000000
+#special_bonds lj 0.0 0.0 0.0 coul 0.0 0.0 0.0
+###########################################################################
+
+###########################################################################
+#run parameters
+###########################################################################
+variable   	dt 		equal 0.001
+variable 	T_run 		equal 300
+variable 	seed 		equal 11111
+
+velocity 		all create ${T_run} ${seed} rot yes dist gaussian
+
+#--------------------------------------------------------------------------
+#nvtanneal
+#--------------------------------------------------------------------------
+fix 		1 all nvt temp 400 400 1.0
+dump		1 all xyz 10 dump.xyz
+dump_modify 	1 sort id
+compute 	myDis all msd 
+thermo_style  	custom step temp press etotal pe ke vol c_myDis[4]
+thermo			10
+timestep		${dt}
+#run			500000
+run			10000
+unfix 			1
+uncompute 		myDis

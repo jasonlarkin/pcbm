@@ -1,0 +1,222 @@
+###########################################################################
+#x0
+###########################################################################
+units 			metal
+atom_style		full
+read_data		fort.26.dihedral_correct
+group         		C type = 1
+###########################################################################
+#OLPS
+###########################################################################
+
+################################################################################
+#### Covalent bond parameters
+################################################################################
+bond_style harmonic
+bond_coeff   1     20.337919      1.4000000
+bond_coeff   2     20.337919      1.4000000
+bond_coeff   3     13.746525      1.5100000
+bond_coeff   4     15.914747      1.0800000
+bond_coeff   5     11.621668      1.5290000
+bond_coeff   6     11.621668      1.5290000
+bond_coeff   7     13.746525      1.5100000
+bond_coeff   8     13.746525      1.5100000
+bond_coeff   9     13.876618      1.4100000
+bond_coeff  10     14.743907      1.0900000
+bond_coeff  11     14.743907      1.0900000
+bond_coeff  12     22.549505      1.2290000
+bond_coeff  13      9.279988      1.3270000
+################################################################################
+#### Covalent angle parameters
+################################################################################
+#angle_style harmonic 
+#angle_coeff 1 5.4639184       120.000
+#angle_coeff 2 5.4639184       120.000
+#angle_coeff 3 5.4639184       120.000
+#angle_coeff 4 6.0710205       120.000
+#angle_coeff 5 3.0355102       120.000
+#angle_coeff 6 3.0355102       120.000
+#angle_coeff 7 5.0606292       112.700
+#angle_coeff 8 5.0606292       112.700
+#angle_coeff 9 5.4639184       114.000
+#angle_coeff 10 5.4639184       111.100
+#angle_coeff 11 3.2523324       110.700
+#angle_coeff 12 3.2523324       110.700
+#angle_coeff 13 3.0355102       109.500
+#angle_coeff 14 3.0355102       109.500
+#angle_coeff 15 2.8620525       107.800
+#angle_coeff 16 2.8620525       107.800
+#angle_coeff 17 7.0250380       111.400
+#angle_coeff 18 6.9383091       120.400
+#angle_coeff 19 7.1984957       123.400
+#angle_coeff 20 7.1984957       116.900
+
+angle_style harmonic 
+angle_coeff 1                  5.4639184       120.000
+angle_coeff 2                  5.4639184       120.000
+angle_coeff 3                  5.4639184       120.000
+angle_coeff 4                  6.0710205       120.000
+angle_coeff 5                  3.0355102       120.000
+angle_coeff 6                  3.0355102       120.000
+angle_coeff 7                  5.0606292       112.700
+angle_coeff 8                  5.0606292       112.700
+angle_coeff 9                  5.4639184       114.000
+angle_coeff 10                  5.4639184       114.000
+angle_coeff 11                  5.4639184       111.100
+angle_coeff 12                  3.2523324       110.700
+angle_coeff 13                  3.2523324       110.700
+angle_coeff 14                  3.0355102       109.500
+angle_coeff 15                  3.0355102       109.500
+angle_coeff 16                  2.8620525       107.800
+angle_coeff 17                  2.8620525       107.800
+angle_coeff 18                  5.4639184       111.100
+angle_coeff 19                  3.4691546       109.500
+angle_coeff 20                  7.0250380       111.400
+angle_coeff 21                  6.9383091       120.400
+angle_coeff 22                  7.1984957       123.400
+angle_coeff 23                  7.1984957       116.900
+angle_coeff 24                  6.0710205       120.000
+################################################################################
+#### Covalent torsion parameters
+################################################################################
+#dihedral_style opls
+#dihedral_coeff   1 0.0 0.62878426 0.0 0.0 
+#dihedral_coeff   2 0.0 0.62878426 0.0 0.0
+#dihedral_coeff   3 0.0 0.62878426 0.0 0.0
+#dihedral_coeff   4 0.0 0.62878426 0.0 0.0
+#dihedral_coeff   5 0.05637376 0.0 0.0 0.0
+#dihedral_coeff   6 0.0 -0.00216822 0.0 0.0
+#dihedral_coeff   7 0.0 0.0 0.00867288 0.0
+#dihedral_coeff   8 0.0 0.0 0.01300932 0.0
+#dihedral_coeff   9 0.0 0.0 0.01300932 0.0
+#dihedral_coeff  10 0.0 0.0 0.01300932 0.0
+#dihedral_coeff  11 -0.01201194 0.0 0.0 0.0
+#dihedral_coeff  12 0.0 0.05325152 0.0 0.0
+#dihedral_coeff  13 0.0 0.0 -0.03009492 0.0
+#dihedral_coeff  14 0.0 -0.02398054 0.0 0.0
+#dihedral_coeff  15 0.0 0.0057241 0.0 0.0
+#dihedral_coeff  16 0.20246854 0.0 0.0 0.0
+#dihedral_coeff  17 0.0 0.22219934 0.0 0.0
+#dihedral_coeff  18 0.0 0.22219934 0.0 0.0
+#dihedral_coeff  19 0.0 0.0 0.00858616 0.0
+
+dihedral_style opls
+#H1    c C2    c C2    c H1    c  0.3144     -   2     0.00  Bonded 
+dihedral_coeff   1 0.0 0.62878426 0.0 0.0 
+             
+#H1    c C2    c C2    c C2    c  0.3144     -   2     0.00  Bonded 
+dihedral_coeff   2 0.62878426 0.0 0.0 0.0 
+             
+#H1    c C2    c C2    c C3    c  0.3144     -   2     0.00  Bonded  
+dihedral_coeff   3 0.62878426 0.0 0.0 0.0 
+            
+#H1    c C2    c C3    c C7    c  0.3144     -   2     0.00  Bonded  
+dihedral_coeff   4 0.0 0.62878426 0.0 0.0 
+            
+#C7    c C5    c C5    c C5    c  0.2819E-01 +   1     0.00  Bonded  
+dihedral_coeff   5 0.05637376 0.0 0.0 0.0
+            
+#C7    c C5    c C5    c C5    c  -.1084E-02 -   2     0.00  Bonded 
+dihedral_coeff   6 0.00216822 0.0 0.0 0.0 #changed
+             
+#C7    c C5    c C5    c C5    c  0.4336E-02 +   3     0.00  Bonded   
+dihedral_coeff   7 0.00867288 0.0 0.0 0.0
+           
+#C5    c C5    c C5    c H2    c  0.6505E-02 +   3     0.00  Bonded 
+dihedral_coeff   8 0.0 0.0 0.01300932 0.0
+             
+#C7    c C5    c C5    c H2    c  0.6505E-02 +   3     0.00  Bonded  
+dihedral_coeff   9 0.01300932 0.0 0.0 0.0
+           
+#O1    c C4    c C5    c C5    c  -.6006E-02 +   1     0.00  Bonded  
+dihedral_coeff  10 -0.01201194 0.0 0.0 0.0
+            
+#O1    c C4    c C5    c C5    c  0.2663E-01 -   2     0.00  Bonded 
+dihedral_coeff  11 0.0 0.05325152 0.0 0.0
+            
+#O1    c C4    c C5    c C5    c  -.1505E-01 +   3     0.00  Bonded 
+dihedral_coeff  12 0.0 0.0 -0.03009492 0.0
+             
+#O2    c C4    c C5    c C5    c  -.1199E-01 -   2     0.00  Bonded
+dihedral_coeff  13 0.02398054 0.0 0.0 0.0
+              
+#O2    c C4    c C5    c H2    c  0.2862E-02 -   2     0.00  Bonded  
+dihedral_coeff  14 0.0 -0.0057241 0.0 0.0
+            
+#C5    c C4    c O2    c C6    c  0.1012     +   1     0.00  Bonded  
+dihedral_coeff  15 0.20246854 0.0 0.0 0.0
+            
+#C5    c C4    c O2    c C6    c  0.1111     -   2     0.00  Bonded 
+dihedral_coeff  16 0.22219934 0.0 0.0 0.0
+             
+#O1    c C4    c O2    c C6    c  0.1111     -   2     0.00  Bonded 
+dihedral_coeff  17 0.0 0.22219934 0.0 0.0
+             
+#C4    c O2    c C6    c H2    c  0.4293E-02 +   3     0.00  Bonded  
+dihedral_coeff  18 0.0 0.0 0.00858616 0.0
+
+#C4    c O2    c C6    c H2    c  0.4293E-02 +   3     0.00  Bonded  
+dihedral_coeff  19 0.00858616 0.0 0.0 0.0
+
+#C4    c O2    c C6    c H2    c  0.4293E-02 +   3     0.00  Bonded  
+#dihedral_coeff  20 0.0 0.0 0.0 0.01301
+
+#C1    c C1    c C7    c C3    c  0.3144     -   2     0.00  Bonded    
+#dihedral_coeff  21 0.0 0.62880000 0.0 0.0
+            
+#C1    c C7    c C5    c C5    c  0.2819E-01 +   1     0.00  Bonded              
+#C1    c C7    c C5    c C5    c  -.1084E-02 -   2     0.00  Bonded              
+#C1    c C7    c C5    c C5    c  0.4336E-02 +   3     0.00  Bonded              
+#C1    c C7    c C5    c H2    c  0.6505E-02 +   3     0.00  Bonded              
+#C1    c C1    c C7    c C3    c  0.3144     -   2     0.00  Bonded              
+#C1    c C1    c C7    c C5    c  0.3144     -   2     0.00  Bonded   
+
+################################################################################
+#### Pair potentials
+################################################################################
+#pair_style hybrid/overlay tersoff lj/cut 12.0 coul/wolf 0.223 12.0
+
+
+pair_style hybrid/overlay tersoff coul/wolf 0.223 12.0 #lj/cut 12.0
+pair_coeff * * tersoff C.1.tersoff 1 NULL NULL NULL NULL NULL NULL NULL NULL NULL NULL
+pair_coeff * * coul/wolf
+#pair_coeff 1 1 lj/cut 0.0660000000 3.5000000000  
+#pair_coeff 2 2 lj/cut 0.0700000000 3.5500000000  
+#pair_coeff 3 3 lj/cut 0.0700000000 3.5500000000  
+#pair_coeff 4 4 lj/cut 0.2100000000 2.9600000000  
+#pair_coeff 5 5 lj/cut 0.1400000000 2.9000000000  
+#pair_coeff 6 6 lj/cut 0.0660000000 3.5000000000  
+#pair_coeff 7 7 lj/cut 0.1050000000 3.7500000000   
+#pair_coeff 8 8 lj/cut 0.0660000000 3.5000000000   
+#pair_coeff 9 9 lj/cut 0.0300000000 2.4200000000   
+#pair_coeff 10 10 lj/cut 0.0300000000 2.5000000000    
+#pair_modify mix geometric
+special_bonds coul 0.0 0.0 0.0
+
+#special_bonds lj 0.0 0.0  0.00000 coul 0.0 0.0  0.00000 angle yes dihedral yes
+###########################################################################
+
+###########################################################################
+#run parameters
+###########################################################################
+variable   	dt 		equal 0.001
+variable 	T_run 		equal 1
+variable 	seed 		equal 11111
+
+velocity 		all create ${T_run} ${seed} rot yes dist gaussian
+
+#--------------------------------------------------------------------------
+#nvtanneal
+#--------------------------------------------------------------------------
+#fix 		1 all nvt temp 100 100 10.0
+fix 		1 all nve 
+dump		1 all xyz 10 dump.xyz
+dump_modify 	1 sort id
+compute 	myDis all msd 
+thermo_style  	custom step temp press etotal pe ke vol c_myDis[4]
+thermo			10
+timestep		${dt}
+#run			500000
+run			10000
+unfix 			1
+uncompute 		myDis

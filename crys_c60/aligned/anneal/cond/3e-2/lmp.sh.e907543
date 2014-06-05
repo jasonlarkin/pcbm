@@ -1,0 +1,13 @@
+ModuleCmd_Load.c(200):ERROR:105: Unable to locate a modulefile for 'dacapo-j'
+ModuleCmd_Load.c(200):ERROR:105: Unable to locate a modulefile for 'atat'
+ModuleCmd_Load.c(200):ERROR:105: Unable to locate a modulefile for 'my-vasp'
+/home/jason/.bashrc: line 59: /home/jason/.bashDirB: No such file or directory
+--------------------------------------------------------------------------
+WARNING: There is at least one OpenFabrics device found but there are
+no active ports detected (or Open MPI was unable to use them).  This
+is most certainly not what you wanted.  Check your cables, subnet
+manager configuration, etc.  The openib BTL will be ignored for this
+job.
+
+  Local host: n15
+--------------------------------------------------------------------------

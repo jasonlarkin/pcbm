@@ -1,0 +1,35 @@
+CMA: unable to open /dev/infiniband/rdma_cm
+CMA: unable to open /dev/infiniband/rdma_cm
+CMA: unable to open /dev/infiniband/rdma_cm
+CMA: unable to open /dev/infiniband/rdma_cm
+CMA: unable to open /dev/infiniband/rdma_cm
+CMA: unable to open /dev/infiniband/rdma_cm
+CMA: unable to open /dev/infiniband/rdma_cm
+CMA: unable to open /dev/infiniband/rdma_cm
+CMA: unable to open /dev/infiniband/rdma_cm
+CMA: unable to open /dev/infiniband/rdma_cm
+CMA: unable to open /dev/infiniband/rdma_cm
+CMA: unable to open /dev/infiniband/rdma_cm
+CMA: unable to open /dev/infiniband/rdma_cm
+CMA: unable to open /dev/infiniband/rdma_cm
+CMA: unable to open /dev/infiniband/rdma_cm
+CMA: unable to open /dev/infiniband/rdma_cm
+LAMMPS (2 Nov 2010)
+Scanning data file ...
+  0 = max bonds/atom
+  0 = max angles/atom
+  0 = max dihedrals/atom
+Reading data file ...
+  triclinic box = (0 0 0) to (28.8 28.8 28.8) with tilt (0 0 0)
+  2 by 2 by 4 processor grid
+  1920 atoms
+  0 bonds
+  0 angles
+  0 dihedrals
+Finding 1-2 1-3 1-4 neighbors ...
+  0 = max # of 1-2 neighbors
+  0 = max # of 1-3 neighbors
+  0 = max # of 1-4 neighbors
+  1 = max # of special neighbors
+60 atoms in group C
+ERROR on proc 0: Cannot open Tersoff potential file C.temp.tersoff

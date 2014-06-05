@@ -1,0 +1,5 @@
+ModuleCmd_Load.c(200):ERROR:105: Unable to locate a modulefile for 'dacapo-j'
+ModuleCmd_Load.c(200):ERROR:105: Unable to locate a modulefile for 'atat'
+ModuleCmd_Load.c(200):ERROR:105: Unable to locate a modulefile for 'my-vasp'
+/home/jason/.bashrc: line 59: /home/jason/.bashDirB: No such file or directory
+/var/spool/torque/mom_priv/jobs/907540.gilgamesh.cheme.cmu.edu.SC: line 8: /home/jason/Dropbox/pcbm_pdb/crys_c60/aligned/anneal/cond/1e-2/lmp.in.gk: No such file or directory

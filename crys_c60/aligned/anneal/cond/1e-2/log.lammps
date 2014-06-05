@@ -1,0 +1,77 @@
+LAMMPS (2 Nov 2010)
+##########SEED##########################################################
+#label loop_seed
+#variable iseed loop 10
+#variable seed index 11111 22222 33333 44444 55555 66666 77777 88888 99999 11110
+clear
+###########################################################################
+#x0
+###########################################################################
+units 			metal
+atom_style		full
+read_data		fort.26.nonbonded
+  0 = max bonds/atom
+  0 = max angles/atom
+  0 = max dihedrals/atom
+  triclinic box = (0 0 0) to (14.3 14.3 14.3) with tilt (0 0 0)
+  1 by 1 by 1 processor grid
+  240 atoms
+  0 bonds
+  0 angles
+  0 dihedrals
+  0 = max # of 1-2 neighbors
+  0 = max # of 1-3 neighbors
+  0 = max # of 1-4 neighbors
+  1 = max # of special neighbors
+group         		C type = 1
+60 atoms in group C
+
+###########################################################################
+#conductance
+###########################################################################
+#Layers
+group hSource molecule 1
+60 atoms in group hSource
+group hSink molecule 2 3 4
+180 atoms in group hSink
+group moving id > 0  
+240 atoms in group moving
+variable heat equal 1e-2                
+
+###########################################################################
+#OLPS
+###########################################################################
+
+################################################################################
+#### Pair potentials
+################################################################################
+pair_style hybrid/overlay tersoff lj/cut 12.0
+pair_coeff * * tersoff C.4.tersoff 1 2 3 4
+pair_coeff 1 2 lj/cut 0.0007000000 3.5500000000
+pair_coeff 1 3 lj/cut 0.0007000000 3.5500000000
+pair_coeff 1 4 lj/cut 0.0007000000 3.5500000000
+pair_coeff 2 3 lj/cut 0.0007000000 3.5500000000
+pair_coeff 2 4 lj/cut 0.0007000000 3.5500000000
+pair_coeff 3 4 lj/cut 0.0007000000 3.5500000000
+special_bonds lj 0.0 0.0 0.0 coul 0.0 0.0 0.0
+
+#pair_style tersoff 
+#pair_coeff * * C.4.tersoff 1 2 3 4
+
+#pair_style lj/cut 12.0
+#pair_coeff 1 1 0.0700000000 3.5500000000
+#special_bonds lj 0.0 0.0 0.0 coul 0.0 0.0 0.0
+###########################################################################
+
+#--------------------------------------------------------------------------
+#variables
+#--------------------------------------------------------------------------
+variable   	dt 		equal 0.001
+#--------------------------------------------------------------------------
+variable 	seed 		equal 11111
+#--------------------------------------------------------------------------
+variable 	T_run 		equal 300
+#--------------------------------------------------------------------------
+
+log 	log_heat_${seed}.lammps
+log 	log_heat_11111.lammps

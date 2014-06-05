@@ -1,0 +1,126 @@
+##########SEED##########################################################
+#label loop_seed
+#variable iseed loop 10
+#variable seed index 11111 22222 33333 44444 55555 66666 77777 88888 99999 11110
+clear
+###########################################################################
+#x0
+###########################################################################
+units 			metal
+atom_style		full
+read_data		fort.26.nonbonded
+group         		C type = 1
+
+###########################################################################
+#conductance
+###########################################################################
+#Layers
+group hSource molecule 1
+group hSink molecule 2 3 4
+group moving id > 0  
+variable heat equal 2e-2                
+
+###########################################################################
+#OLPS
+###########################################################################
+
+################################################################################
+#### Pair potentials
+################################################################################
+pair_style hybrid/overlay tersoff lj/cut 12.0
+pair_coeff * * tersoff C.4.tersoff 1 2 3 4
+pair_coeff 1 2 lj/cut 0.0007000000 3.5500000000
+pair_coeff 1 3 lj/cut 0.0007000000 3.5500000000
+pair_coeff 1 4 lj/cut 0.0007000000 3.5500000000
+pair_coeff 2 3 lj/cut 0.0007000000 3.5500000000
+pair_coeff 2 4 lj/cut 0.0007000000 3.5500000000
+pair_coeff 3 4 lj/cut 0.0007000000 3.5500000000
+special_bonds lj 0.0 0.0 0.0 coul 0.0 0.0 0.0
+
+#pair_style tersoff 
+#pair_coeff * * C.4.tersoff 1 2 3 4
+
+#pair_style lj/cut 12.0
+#pair_coeff 1 1 0.0700000000 3.5500000000
+#special_bonds lj 0.0 0.0 0.0 coul 0.0 0.0 0.0
+###########################################################################
+
+#--------------------------------------------------------------------------
+#variables
+#--------------------------------------------------------------------------
+variable   	dt 		equal 0.001
+#--------------------------------------------------------------------------
+variable 	seed 		equal 11111
+#--------------------------------------------------------------------------
+variable 	T_run 		equal 300
+#--------------------------------------------------------------------------
+
+log 	log_heat_${seed}.lammps
+
+#--------------------------------------------------------------------------
+#nve rescale
+#--------------------------------------------------------------------------
+	velocity 		all create ${T_run} ${seed} rot yes dist gaussian
+
+	fix 			1 all nve
+	fix 			2 all temp/rescale 1 ${T_run} ${T_run} 0.01 1.0
+	compute 	movingTemp moving temp  
+	fix_modify	2 temp movingTemp
+	fix		3 moving ave/time 10 100 1000 c_movingTemp
+    	thermo_style	custom step c_movingTemp press etotal pe ke vol
+	thermo        	1000
+	timestep	${dt}
+	thermo_style  	custom step temp press etotal vol
+	thermo		1000
+	run             100000	
+#	run             1000
+	unfix 		1
+	unfix 		2
+#--------------------------------------------------------------------------
+#nve
+#--------------------------------------------------------------------------
+	fix 			1 all nve
+	timestep		${dt}
+	thermo_style  		custom step temp press etotal vol
+	thermo			1000
+	run             	100000	
+#	run             	1000
+	unfix 			1
+#--------------------------------------------------------------------------
+#kappa
+#--------------------------------------------------------------------------
+log 	log_cond_${seed}.lammps
+	reset_timestep  	0
+	fix 			1 all nve
+
+	compute		keSource all ke/atom
+	compute		keSource2 all atom/molecule c_keSource
+	compute		keSink all ke/atom
+	compute		keSink2 all atom/molecule c_keSink
+	fix		cRes hSink heat 1 -${heat}
+	fix		hRes hSource heat 1 ${heat}
+	fix		3 moving ave/time 10 100 1000 c_movingTemp
+    	thermo_style	custom step c_movingTemp press etotal pe ke vol
+
+	fix 		kemolSource all ave/time 10 100 1000 c_keSource2 &
+file kemolSource.txt mode vector
+	fix 		kemolSink all ave/time 10 100 1000 c_keSink2 &
+file kemolSink.txt mode vector
+	
+	compute 		myDis all msd 
+	thermo_style 		custom step temp press vol c_myDis[4] c_movingTemp 
+	thermo			1000
+	timestep		${dt}
+	run			1000000
+#	run			10000
+	unfix			1
+	uncompute		myDis
+	uncompute		keSource
+	uncompute		keSource2
+	uncompute		keSink
+	uncompute		keSink2
+
+
+#	next seed
+#	next iseed
+#jump lmp.in.gk loop_seed
