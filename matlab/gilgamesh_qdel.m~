@@ -1,4 +1,0 @@
-str='';
-for i=685421:563419
-str = [str;'qdel ' int2str(i)]
-end
