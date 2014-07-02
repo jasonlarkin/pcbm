@@ -1,0 +1,89 @@
+## NOTES:
+# This script takes the input file of a single CNT and heats it up to a target temperature
+# using the Langevin thermostat
+# Also, this is a just a brief description.  Try looking up each command in the LAMMPS manual
+# for a better description of what's going on.  If I write [See 'example'], try looking up the
+# command 'example' here: http://lammps.sandia.gov/doc/Section_commands.html#cmd_5
+####
+label loop_seed
+variable iseed loop 2
+variable seed index 11111 22222
+####
+units metal
+atom_style full
+read_data $STRUCTURE_FILE$
+
+variable 	atoms equal 4*60*$N_UC$*$N_UC$*$N_UC$
+
+$GROUP_HEAD$
+
+####
+#POTENTIAL
+####
+pair_style hybrid/overlay tersoff lj/cut 12.0
+$PAIR_COEFF_HEAD$
+
+$PAIR_COEFF_BODY$
+
+special_bonds lj 0.0 0.0 0.0 coul 0.0 0.0 0.0
+
+
+###
+#DATA VARIABLES
+###
+variable R equal 1000000
+variable D equal 1000	        # Print out atomic positions on this timestep interval
+variable T equal 100 		# Print out "thermo" information on this timestep interval
+
+
+## SIMULATION VARIABLES: Deal with the physical parameters of the simulation ################
+variable dt equal 0.001		# Timestep in picoseconds (ps)
+variable scale equal 0.05       # Scaling factor for heating routine
+variable TEMP equal $TEMP$		# Target temperature of structure
+	      	    		# YOU CAN EDIT THIS VALUE TO CHANGE TARGET TEMPERATURE
+
+
+region   all_mols block INF INF INF INF INF INF units box
+
+group           T_hot_mol  molecule  2
+group           T_cold_mol molecule  1 
+group		all region all_mols 
+	
+log 	log-heat_${iseed}.lammps
+###
+#begin simulation
+###
+velocity all create ${TEMP} ${SEED} dist gaussian sum no mom yes rot yes 
+
+###
+#NVE RESCALE
+###
+fix int1 all nve
+	fix int2 all temp/rescale 1 ${TEMP} ${TEMP} 0.1 1.0
+		timestep ${dt}
+run 100000
+unfix int1 
+unfix int2
+
+log 	log_equilibrated_$EXP$.lammps.${iseed}
+
+###
+#NVE
+###
+fix int2 all nve
+   timestep ${dt}
+   thermo_style custom step temp etotal pe ke press vol epair
+   tmermo $T
+
+fix hottie  T_hot_mol heat 1 0.125   #ev/ps
+fix coldie T_cold_mol heat 1 -0.125
+
+compute KE1 all ke/atom
+fix OUT1 all ave/spatial  1 1 10000 z center 1.0 y center 1.0 x center 1.0 c_KE1 units box region all_mols file ke_mid_temp1_0.out
+
+
+run 1000000
+unfix OUT1
+# It is good to write a restart file at the end (or periodically during) each simulation so
+# that you can pick-up where you left off later
+write_restart rst.*.heat
